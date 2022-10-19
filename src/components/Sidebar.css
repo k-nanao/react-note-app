@@ -58,6 +58,10 @@ button:hover {
 
 .app-sidebar-note.active,
 .app-sidebar-note.active small {
-  background: #af7daa;
+  background: #779681;
   color: white;
+}
+
+.app-sidebar-note.active > .sidebar-note-title > button {
+  color: #fff;
 }
