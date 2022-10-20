@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
@@ -6,7 +6,7 @@ import uuid from 'react-uuid';
 
 function App() {
   //追加されるノートを配列で格納する
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes')) || []);
   //アクティブになっているかの状態を管理する
   const [activeNote, setActiveNote] = useState(false);
 
@@ -46,6 +46,15 @@ function App() {
     });
     setNotes(upDatedNotesArray);
   };
+
+  useEffect(()=>{
+    //ローカルストレージに荷ノートを保存する
+    localStorage.setItem('notes', JSON.stringify(notes))
+  },[notes])
+
+  useEffect(()=>{
+    setActiveNote(notes[0].id)
+  },[])
 
   return (
     <div className='App'>
